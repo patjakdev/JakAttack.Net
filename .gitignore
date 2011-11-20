@@ -1,6 +1,6 @@
 
 JakAttack.Net.suo
-JakAttack.Net.Tests/obj/
-JakAttack.Net/obj/
-JakAttack.Net.Tests/bin/
-JakAttack.Net/bin/
+JakAttack.Tests/obj/
+JakAttack/obj/
+JakAttack.Tests/bin/
+JakAttack/bin/

@@ -1,0 +1,32 @@
+@model JakAttack.Models.BlogPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>BlogPost</legend>
+
+    <div class="display-label">Author</div>
+    <div class="display-field">@Model.Author</div>
+
+    <div class="display-label">Content</div>
+    <div class="display-field">@Model.Content</div>
+
+    <div class="display-label">DatePosted</div>
+    <div class="display-field">@Model.DatePosted</div>
+
+    <div class="display-label">DateLastModified</div>
+    <div class="display-field">@Model.DateLastModified</div>
+
+    <div class="display-label">Comments</div>
+    <div class="display-field">@(Model.Comments == null ? "None" : Model.Comments.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BlogPostId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

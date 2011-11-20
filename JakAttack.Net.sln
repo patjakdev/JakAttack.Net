@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakAttack.Net", "JakAttack.Net\JakAttack.Net.csproj", "{E2ACCCEA-4A2C-4041-A554-66E856796559}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakAttack", "JakAttack\JakAttack.csproj", "{E2ACCCEA-4A2C-4041-A554-66E856796559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakAttack.Net.Tests", "JakAttack.Net.Tests\JakAttack.Net.Tests.csproj", "{007330E1-094D-4824-B998-F14D4417F509}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakAttack.Tests", "JakAttack.Tests\JakAttack.Tests.csproj", "{007330E1-094D-4824-B998-F14D4417F509}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
