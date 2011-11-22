@@ -1,23 +1,21 @@
 @model JakAttack.Models.BlogPost
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Blog - Edit Post";
+    ViewBag.SectionTitle = "blog";
 }
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>BlogPost</legend>
-
-        @Html.HiddenFor(model => model.BlogPostId)
-		@Html.Partial("_CreateOrEdit", Model)
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    @Html.HiddenFor(model => model.BlogPostId)
+    @Html.HiddenFor(model => model.DatePosted)
+    @Html.HiddenFor(model => model.DateLastModified)
+    <div>@Html.LabelFor(model => model.Title) @Html.EditorFor(model => model.Title)</div>
+    <div>@Html.LabelFor(model => model.Content) @Html.EditorFor(model => model.Content)</div>
+    <input type="submit" value="Save" />
 }
 
 <div>

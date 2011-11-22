@@ -1,22 +1,21 @@
 @model JakAttack.Models.BlogPost
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Blog - Create Post";
+    ViewBag.SectionTitle = "blog";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>BlogPost</legend>
-
-		@Html.Partial("_CreateOrEdit", Model)
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    <div>@Html.LabelFor(model => model.Title) @Html.EditorFor(model => model.Title)</div>
+    <div>@Html.LabelFor(model => model.Content) @Html.EditorFor(model => model.Content)</div>
+    <input type="submit" value="Save" />
 }
 
 <div>

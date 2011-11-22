@@ -2,6 +2,14 @@
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
 
-<div id="content">
-    @RenderBody()
+<div id="contentWrapper">
+    <header>
+        <a id="small_logo" href="@Url.Action("Index", "Home")">
+            <img src="@Url.Content("~/images/jakattack_logo_143x31.png")" alt="jakattack.net" />
+        </a>
+        <h2><a href="@Url.Action("Index")">@ViewBag.SectionTitle.ToLower()</a></h2>
+    </header>
+    <div id="content">
+        @RenderBody()
+    </div>
 </div>

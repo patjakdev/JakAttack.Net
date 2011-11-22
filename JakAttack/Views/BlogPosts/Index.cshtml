@@ -1,59 +1,31 @@
 @model IEnumerable<JakAttack.Models.BlogPost>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Blog";
+    ViewBag.SectionTitle = "blog";
 }
-
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th></th>
-        <th>
-            Author
-        </th>
-        <th>
-            Content
-        </th>
-        <th>
-            DatePosted
-        </th>
-        <th>
-            DateLastModified
-        </th>
-        <th>
-            Comments
-        </th>
-    </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BlogPostId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BlogPostId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BlogPostId })
-        </td>
-        <td>
-			@item.Author
-        </td>
-        <td>
-			@item.Content
-        </td>
-        <td>
-			@item.DatePosted
-        </td>
-        <td>
-			@item.DateLastModified
-        </td>
-        <td>
-			@(item.Comments == null ? "None" : item.Comments.Count.ToString())
-        </td>
-    </tr>
+    <article class="blogPost">
+        <header>
+            <div class="timestamps">
+                <div>Posted: <time pubdate datetime="@item.DatePosted.ToString("u")">@item.DatePosted.ToString("u")</time></div>
+                @if (item.DatePosted.CompareTo(item.DateLastModified) != 0)
+                {
+                <div>Modified: <time pubdate datetime="@item.DateLastModified.ToString("u")">@item.DateLastModified.ToString("u")</time></div>
+                }
+            </div>
+            <h1>@Html.ActionLink(item.Title, "Details", new { id = item.BlogPostId })</h1>
+            <div class="author">By: Test User</div>
+        </header>
+        <div class="post">
+            @item.Content
+        </div>
+    </article>
 }
-
-</table>
 
 

@@ -18,7 +18,7 @@ namespace JakAttack.Controllers
 
         public ViewResult Index()
         {
-            return View(context.BlogPosts.ToList());
+            return View(context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
         }
 
         //
@@ -44,6 +44,9 @@ namespace JakAttack.Controllers
         [HttpPost]
         public ActionResult Create(BlogPost blogpost)
         {
+            blogpost.DatePosted = DateTime.Now.ToUniversalTime();
+            blogpost.DateLastModified = blogpost.DatePosted;
+
             if (ModelState.IsValid)
             {
                 context.BlogPosts.Add(blogpost);

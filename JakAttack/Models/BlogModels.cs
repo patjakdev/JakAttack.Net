@@ -10,26 +10,26 @@ namespace JakAttack.Models
     public class BlogPost
     {
         [Required]
-        [Display(Name = "Blog Post ID")]
         public int BlogPostId { get; set; }
 
         [Required]
-        [Display(Name = "Author")]
-        public string Author { get; set; }
+        [Display(Name = "Title")]
+        public string Title { get; set; }
 
         [Required]
         [Display(Name = "Content")]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Posted On")]
-        public string DatePosted { get; set; }
+        public DateTime DatePosted { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Last Modified On")]
-        public string DateLastModified { get; set; }
+        public DateTime DateLastModified { get; set; }
 
         public virtual ICollection<BlogPostComment> Comments { get; set; }
     }
@@ -37,7 +37,6 @@ namespace JakAttack.Models
     public class BlogPostComment
     {
         [Required]
-        [Display(Name = "Comment ID")]
         public int BlogPostCommentId { get; set; }
 
         [Required]
