@@ -21,7 +21,25 @@ div#title
     left:     100px;
     z-index:  100;
 }
-    
+
+a#login
+{
+    display:            block;
+    position:           fixed;
+    top:                0px;
+    right:              0px;
+    padding:            10px 20px;
+    color:              white;
+    background-color:   #ccc;
+    margin:             20px;
+    text-decoration:    none;
+}
+
+a#login:hover
+{
+    text-decoration:    underline;
+}
+
 nav 
 {
     position:         fixed;
@@ -99,7 +117,6 @@ div#contentWrapper
     background-color:   rgba(255,255,255,0.9);
     min-height:         100%;
     position:           relative;
-    padding-bottom:     110px;  /* Ensures the content scrolls to just above the navigation bar */
 }
 
 div#contentWrapper > header
@@ -133,6 +150,7 @@ div#contentWrapper > header > h2 > a
 div#content
 {
     padding:            20px;
+    padding-bottom:     110px;  /* Ensures the content scrolls to just above the navigation bar */
     word-break:         break-all;
 }
 
@@ -177,5 +195,5 @@ div#content > article.blogPost > header > div.timestamps
 div#content > article.blogPost > div.post
 {
     padding:            10px;
-    background-color:   rgba(255,255,255,0.5);    
+    background-color:   rgba(255,255,255,0.5);
 }

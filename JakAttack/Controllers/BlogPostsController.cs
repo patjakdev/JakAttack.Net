@@ -11,14 +11,14 @@ namespace JakAttack.Controllers
 {   
     public class BlogPostsController : Controller
     {
-        private JakAttackContext context = new JakAttackContext();
+        private JakAttackContext _context = new JakAttackContext();
 
         //
         // GET: /BlogPosts/
 
         public ViewResult Index()
         {
-            return View(context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
+            return View(_context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
         }
 
         //
@@ -26,7 +26,7 @@ namespace JakAttack.Controllers
 
         public ViewResult Details(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
@@ -49,8 +49,8 @@ namespace JakAttack.Controllers
 
             if (ModelState.IsValid)
             {
-                context.BlogPosts.Add(blogpost);
-                context.SaveChanges();
+                _context.BlogPosts.Add(blogpost);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -62,7 +62,7 @@ namespace JakAttack.Controllers
  
         public ActionResult Edit(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
@@ -74,8 +74,8 @@ namespace JakAttack.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(blogpost).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(blogpost).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(blogpost);
@@ -86,7 +86,7 @@ namespace JakAttack.Controllers
  
         public ActionResult Delete(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
@@ -96,9 +96,9 @@ namespace JakAttack.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
-            context.BlogPosts.Remove(blogpost);
-            context.SaveChanges();
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
+            _context.BlogPosts.Remove(blogpost);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
