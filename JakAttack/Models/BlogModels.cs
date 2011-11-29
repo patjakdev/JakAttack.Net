@@ -31,6 +31,8 @@ namespace JakAttack.Models
         [Display(Name = "Last Modified On")]
         public DateTime DateLastModified { get; set; }
 
+        public virtual User Author { get; set; }
+
         public virtual ICollection<BlogPostComment> Comments { get; set; }
     }
 

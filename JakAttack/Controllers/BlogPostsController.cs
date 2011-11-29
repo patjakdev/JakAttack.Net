@@ -11,14 +11,14 @@ namespace JakAttack.Controllers
 {   
     public class BlogPostsController : Controller
     {
-        private JakAttackContext context = new JakAttackContext();
+        private JakAttackContext _context = new JakAttackContext();
 
         //
         // GET: /BlogPosts/
 
         public ViewResult Index()
         {
-            return View(context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
+            return View(_context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
         }
 
         //
@@ -26,13 +26,13 @@ namespace JakAttack.Controllers
 
         public ViewResult Details(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
         //
         // GET: /BlogPosts/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -40,17 +40,18 @@ namespace JakAttack.Controllers
 
         //
         // POST: /BlogPosts/Create
-
+        [Authorize]
         [HttpPost]
         public ActionResult Create(BlogPost blogpost)
         {
             blogpost.DatePosted = DateTime.Now.ToUniversalTime();
             blogpost.DateLastModified = blogpost.DatePosted;
-
+            blogpost.Author = _context.Users.Single(u => u.ClaimedId == User.Identity.Name);
+            
             if (ModelState.IsValid)
             {
-                context.BlogPosts.Add(blogpost);
-                context.SaveChanges();
+                _context.BlogPosts.Add(blogpost);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,23 +60,23 @@ namespace JakAttack.Controllers
         
         //
         // GET: /BlogPosts/Edit/5
- 
+        [Authorize]
         public ActionResult Edit(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
         //
         // POST: /BlogPosts/Edit/5
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(BlogPost blogpost)
         {
             if (ModelState.IsValid)
             {
-                context.Entry(blogpost).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(blogpost).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(blogpost);
@@ -83,22 +84,22 @@ namespace JakAttack.Controllers
 
         //
         // GET: /BlogPosts/Delete/5
- 
+        [Authorize]
         public ActionResult Delete(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
             return View(blogpost);
         }
 
         //
         // POST: /BlogPosts/Delete/5
-
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogPost blogpost = context.BlogPosts.Single(x => x.BlogPostId == id);
-            context.BlogPosts.Remove(blogpost);
-            context.SaveChanges();
+            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
+            _context.BlogPosts.Remove(blogpost);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
