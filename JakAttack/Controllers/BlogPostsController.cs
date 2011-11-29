@@ -32,7 +32,7 @@ namespace JakAttack.Controllers
 
         //
         // GET: /BlogPosts/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -40,7 +40,7 @@ namespace JakAttack.Controllers
 
         //
         // POST: /BlogPosts/Create
-
+        [Authorize]
         [HttpPost]
         public ActionResult Create(BlogPost blogpost)
         {
@@ -59,7 +59,7 @@ namespace JakAttack.Controllers
         
         //
         // GET: /BlogPosts/Edit/5
- 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
@@ -68,7 +68,7 @@ namespace JakAttack.Controllers
 
         //
         // POST: /BlogPosts/Edit/5
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(BlogPost blogpost)
         {
@@ -83,7 +83,7 @@ namespace JakAttack.Controllers
 
         //
         // GET: /BlogPosts/Delete/5
- 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
@@ -92,7 +92,7 @@ namespace JakAttack.Controllers
 
         //
         // POST: /BlogPosts/Delete/5
-
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

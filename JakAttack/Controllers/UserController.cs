@@ -23,7 +23,7 @@ namespace JakAttack.Controllers
             s_relyingParty.DiscoveryServices.Insert(0, new HostMetaDiscoveryService { UseGoogleHostedHostMeta = true });
         }
 
-        public ActionResult LogIn()
+        public ActionResult LogIn(string ReturnUrl)
         {
             var authResponse = s_relyingParty.GetResponse();
             if (authResponse == null)
