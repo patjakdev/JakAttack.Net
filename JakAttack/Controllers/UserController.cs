@@ -32,12 +32,13 @@ namespace JakAttack.Controllers
                 if (Identifier.TryParse("jakattack.net", out id))
                 {
                     var req = s_relyingParty.CreateRequest(id);
-                    req.Mode = AuthenticationRequestMode.Setup;
                     var fetch = new FetchRequest();
                     fetch.Attributes.Add(new AttributeRequest(WellKnownAttributes.Contact.Email, true));
                     fetch.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.First, true));
                     fetch.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.Last, true));
                     req.AddExtension(fetch);
+
+                    req.AddCallbackArguments("ReturnUrl", ReturnUrl);
 
                     return req.RedirectingResponse.AsActionResult();
                 }
@@ -61,7 +62,7 @@ namespace JakAttack.Controllers
                             _context.Users.Add(user);
                             _context.SaveChanges();
                         }
-                        return RedirectToAction("Index", "Home");
+                        return Redirect(authResponse.GetCallbackArgument("ReturnUrl"));
                     case AuthenticationStatus.Canceled:
                         break;
                     case AuthenticationStatus.Failed:

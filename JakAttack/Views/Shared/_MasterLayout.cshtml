@@ -16,7 +16,7 @@
         @RenderBody()
         @if (!User.Identity.IsAuthenticated)
         {
-        @Html.ActionLink("Log In", "LogIn", "User", null, new { id = "login" })
+        @Html.ActionLink("Log In", "LogIn", "User", new { ReturnUrl = HttpContext.Current.Request.Url.ToString() }, new { id = "login" })
         }
         else
         {
