@@ -8,7 +8,7 @@
 <article class="blogPost">
     <header>
         <h1>@Html.ActionLink(Model.Title, "Details", new { id = Model.BlogPostId })</h1>
-        <div>By: Test User</div>
+        <div>By: @Model.Author.FullName</div>
         <div id="timestamps">
         <div>Posted: <time pubdate datetime="@Model.DatePosted.ToString("u")">@Model.DatePosted.ToString("u")</time></div>
             @if (Model.DatePosted.CompareTo(Model.DateLastModified) != 0)

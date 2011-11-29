@@ -10,10 +10,12 @@ namespace JakAttack.Models
     public class User
     {
         [Required]
-        [Key]
-        public string ClaimedId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
+        [Display(Name = "Claimed ID")]
+        public string ClaimedId { get; set; }
+
         [Display(Name = "Full name")]
         public string FullName
         {

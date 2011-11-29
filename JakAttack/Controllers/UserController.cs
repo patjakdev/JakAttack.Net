@@ -68,7 +68,7 @@ namespace JakAttack.Controllers
                                 FirstName   = fetch.GetAttributeValue(WellKnownAttributes.Name.First),
                                 LastName    = fetch.GetAttributeValue(WellKnownAttributes.Name.Last)
                             };
-                        if (_context.Users.Find(user.ClaimedId) == null)
+                        if (_context.Users.Select(u => u.ClaimedId == user.ClaimedId).Count() == 0)
                         {
                             _context.Users.Add(user);
                             _context.SaveChanges();

@@ -20,7 +20,7 @@
                 }
             </div>
             <h1>@Html.ActionLink(item.Title, "Details", new { id = item.BlogPostId })</h1>
-            <div class="author">By: Test User</div>
+            <div class="author">By: @item.Author.FullName</div>
         </header>
         <div class="post">
             @item.Content

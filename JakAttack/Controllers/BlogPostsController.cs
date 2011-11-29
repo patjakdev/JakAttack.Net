@@ -46,7 +46,8 @@ namespace JakAttack.Controllers
         {
             blogpost.DatePosted = DateTime.Now.ToUniversalTime();
             blogpost.DateLastModified = blogpost.DatePosted;
-
+            blogpost.Author = _context.Users.Single(u => u.ClaimedId == User.Identity.Name);
+            
             if (ModelState.IsValid)
             {
                 _context.BlogPosts.Add(blogpost);
