@@ -69,7 +69,7 @@ nav > ul > li
     
 nav > ul > li:hover 
 {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(200,200,200,0.9);
     color:            #222;
 }
     
@@ -151,7 +151,6 @@ div#content
 {
     padding:            20px;
     padding-bottom:     110px;  /* Ensures the content scrolls to just above the navigation bar */
-    word-break:         break-all;
 }
 
 div#content > article.blogPost
@@ -180,6 +179,11 @@ div#content > article.blogPost > header > h1 > a
 {
     color:              inherit;
     text-decoration:    none;
+}
+
+div#content > article.blogPost > header > h1 > a:hover
+{
+    text-decoration:    underline;
 }
 
 div#content > article.blogPost > header > div.author

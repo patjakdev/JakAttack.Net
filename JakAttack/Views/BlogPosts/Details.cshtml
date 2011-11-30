@@ -5,19 +5,21 @@
     ViewBag.SectionTitle = "blog";
 }
 
-<article class="blogPost">
+ <article class="blogPost">
     <header>
-        <h1>@Html.ActionLink(Model.Title, "Details", new { id = Model.BlogPostId })</h1>
-        <div>By: @Model.Author.FullName</div>
-        <div id="timestamps">
-        <div>Posted: <time pubdate datetime="@Model.DatePosted.ToString("u")">@Model.DatePosted.ToString("u")</time></div>
+        <div class="timestamps">
+            <div>Posted: <time pubdate datetime="@Model.DatePosted.ToString("u")">@Model.DatePosted.ToString("u")</time></div>
             @if (Model.DatePosted.CompareTo(Model.DateLastModified) != 0)
             {
-                <div>Modified: <time pubdate datetime="@Model.DateLastModified.ToString("u")">@Model.DateLastModified.ToString("u")</time></div>
+            <div>Modified: <time pubdate datetime="@Model.DateLastModified.ToString("u")">@Model.DateLastModified.ToString("u")</time></div>
             }
         </div>
+        <h1>@Html.ActionLink(Model.Title, "Details", new { id = Model.BlogPostId })</h1>
+        <div class="author">By: @Model.Author.FullName</div>
     </header>
-    @Model.Content
+    <div class="post">
+        @Model.Content
+    </div>
 </article>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.BlogPostId }) |
