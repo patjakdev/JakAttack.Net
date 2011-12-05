@@ -115,8 +115,7 @@ div#contentWrapper
     min-width:          600px;
     margin:             0px auto;
     background-color:   rgba(255,255,255,0.9);
-    min-height:         100%;
-    position:           relative;
+    height:             100%;
 }
 
 div#contentWrapper > header
@@ -150,7 +149,7 @@ div#contentWrapper > header > h2 > a
 div#content
 {
     padding:            20px;
-    padding-bottom:     110px;  /* Ensures the content scrolls to just above the navigation bar */
+    padding-bottom:     132px;  /* Ensures the content scrolls to just above the navigation bar */
 }
 
 div#content > article.blogPost
