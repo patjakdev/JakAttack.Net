@@ -1,0 +1,18 @@
+﻿@model JakAttack.ViewModels.Blog.DisplayPostViewModel
+
+<article class="blogPost">
+    <header>
+        <div class="timestamps">
+            <div>Posted: <time pubdate datetime="@Model.DatePosted.ToString("u")">@Model.DatePosted.ToString("u")</time></div>
+            @if (Model.DateLastModified.HasValue)
+            {
+            <div>Modified: <time pubdate datetime="@Model.DateLastModified.Value.ToString("u")">@Model.DateLastModified.Value.ToString("u")</time></div>
+            }
+        </div>
+        <h1>@Html.ActionLink(Model.Title, "Details", new { id = Model.Id })</h1>
+        <div class="author">By: @Model.AuthorFullName</div>
+    </header>
+    <div class="post">
+        @Model.Content
+    </div>
+</article>

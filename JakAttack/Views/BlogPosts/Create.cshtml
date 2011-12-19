@@ -1,4 +1,4 @@
-@model JakAttack.Models.BlogPost
+@model JakAttack.ViewModels.Blog.CreateOrModifyPostViewModel
 
 @{
     ViewBag.Title = "Blog - Create Post";
@@ -12,10 +12,8 @@
 
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true)
-    <div>@Html.LabelFor(model => model.Title) @Html.EditorFor(model => model.Title)</div>
-    <div>@Html.LabelFor(model => model.Content) @Html.EditorFor(model => model.Content)</div>
-    <input type="submit" value="Save" />
+    @Html.ValidationSummary(false)
+    @Html.Partial("_Form", Model)
 }
 
 <div>

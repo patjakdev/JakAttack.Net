@@ -1,4 +1,4 @@
-@model JakAttack.Models.BlogPost
+@model JakAttack.ViewModels.Blog.CreateOrModifyPostViewModel
 
 @{
     ViewBag.Title = "Blog - Edit Post";
@@ -9,13 +9,9 @@
 
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.BlogPostId)
-    @Html.HiddenFor(model => model.DatePosted)
-    @Html.HiddenFor(model => model.DateLastModified)
-    <div>@Html.LabelFor(model => model.Title) @Html.EditorFor(model => model.Title)</div>
-    <div>@Html.LabelFor(model => model.Content) @Html.EditorFor(model => model.Content)</div>
-    <input type="submit" value="Save" />
+    @Html.ValidationSummary(false)
+    @Html.HiddenFor(model => model.Id)
+    @Html.Partial("_Form", Model)
 }
 
 <div>

@@ -1,0 +1,5 @@
+﻿@model JakAttack.ViewModels.Blog.CreateOrModifyPostViewModel
+
+@Html.TextBoxFor(model => model.Title, new { placeholder = "Title", @class = "full-width big"})<br />
+@Html.TextAreaFor(model => model.Content, new { placeholder = "Content", @class = "full-width", rows = "10" })
+<input type="submit" value="Save" />

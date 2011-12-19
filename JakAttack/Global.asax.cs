@@ -36,6 +36,10 @@ namespace JakAttack
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            AutoMapper.Mapper.CreateMap<JakAttack.Models.Blog.Post, JakAttack.ViewModels.Blog.CreateOrModifyPostViewModel>();
+            AutoMapper.Mapper.CreateMap<JakAttack.Models.Blog.Post, JakAttack.ViewModels.Blog.DisplayPostViewModel>();
+            AutoMapper.Mapper.AssertConfigurationIsValid();
+            
             // Keep this line while site is under development
             System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<JakAttack.Models.JakAttackContext>());
         }
