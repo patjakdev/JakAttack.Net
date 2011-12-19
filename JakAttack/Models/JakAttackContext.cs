@@ -17,8 +17,7 @@ namespace JakAttack.Models
         // 
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<JakAttack.Models.JakAttackContext>());
 
-        public DbSet<JakAttack.Models.BlogPost> BlogPosts { get; set; }
-
+        public DbSet<JakAttack.Models.Blog.Post> BlogPosts { get; set; }
         public DbSet<JakAttack.Models.User> Users { get; set; }
     }
 }

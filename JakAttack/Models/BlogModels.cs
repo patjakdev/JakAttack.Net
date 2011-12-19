@@ -5,41 +5,29 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace JakAttack.Models
+namespace JakAttack.Models.Blog
 {
-    public class BlogPost
+    public class Post
     {
-        [Required]
-        public int BlogPostId { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Required]
-        [Display(Name = "Content")]
-        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Posted On")]
         public DateTime DatePosted { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Last Modified On")]
-        public DateTime DateLastModified { get; set; }
+        public DateTime? DateLastModified { get; set; }
 
         public virtual User Author { get; set; }
 
-        public virtual ICollection<BlogPostComment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 
-    public class BlogPostComment
+    public class Comment
     {
         [Required]
-        public int BlogPostCommentId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Author")]
@@ -54,6 +42,6 @@ namespace JakAttack.Models
         [Display(Name = "Posted On")]
         public string DatePosted { get; set; }
 
-        public virtual BlogPost BlogPost { get; set; }
+        public virtual Post BlogPost { get; set; }
     }
 }

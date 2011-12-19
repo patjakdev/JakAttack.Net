@@ -9,14 +9,10 @@ namespace JakAttack.Models
 {
     public class User
     {
-        [Required]
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Claimed ID")]
         public string ClaimedId { get; set; }
 
-        [Display(Name = "Full name")]
         public string FullName
         {
             get
@@ -25,16 +21,10 @@ namespace JakAttack.Models
             }
         }
 
-        [Required]
-        [Display(Name = "First name")]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

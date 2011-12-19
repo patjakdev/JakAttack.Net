@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JakAttack.Models;
+using JakAttack.Models.Blog;
+using JakAttack.ViewModels.Blog;
+using AutoMapper;
 
 namespace JakAttack.Controllers
 {   
@@ -18,7 +21,7 @@ namespace JakAttack.Controllers
 
         public ViewResult Index()
         {
-            return View(_context.BlogPosts.OrderByDescending(item => item.DateLastModified).ToList());
+            return View(_context.BlogPosts.OrderByDescending(item => item.DatePosted).ToList().Select(m => Mapper.Map<DisplayPostViewModel>(m)));
         }
 
         //
@@ -26,8 +29,8 @@ namespace JakAttack.Controllers
 
         public ViewResult Details(int id)
         {
-            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
-            return View(blogpost);
+            Post blogpost = _context.BlogPosts.Single(x => x.Id == id);
+            return View(Mapper.Map<DisplayPostViewModel>(blogpost));
         }
 
         //
@@ -42,20 +45,23 @@ namespace JakAttack.Controllers
         // POST: /BlogPosts/Create
         [Authorize]
         [HttpPost]
-        public ActionResult Create(BlogPost blogpost)
+        public ActionResult Create(CreateOrModifyPostViewModel viewModel)
         {
-            blogpost.DatePosted = DateTime.Now.ToUniversalTime();
-            blogpost.DateLastModified = blogpost.DatePosted;
-            blogpost.Author = _context.Users.Single(u => u.ClaimedId == User.Identity.Name);
-            
             if (ModelState.IsValid)
             {
-                _context.BlogPosts.Add(blogpost);
+                Post post = new Post();
+                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model. This would avoid
+                // the over-posting problem below where someone could post Id=3 and specify the post's ID
+                UpdateModel(post);
+                post.DatePosted = DateTime.Now.ToUniversalTime();
+                post.Author = _context.Users.Single(u => u.ClaimedId == User.Identity.Name);
+
+                _context.BlogPosts.Add(post);
                 _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
-            return View(blogpost);
+            return View(viewModel);
         }
         
         //
@@ -63,23 +69,27 @@ namespace JakAttack.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
-            return View(blogpost);
+            Post blogpost = _context.BlogPosts.Single(x => x.Id == id);
+            return View(Mapper.Map<CreateOrModifyPostViewModel>(blogpost));
         }
 
         //
         // POST: /BlogPosts/Edit/5
         [Authorize]
         [HttpPost]
-        public ActionResult Edit(BlogPost blogpost)
+        public ActionResult Edit(CreateOrModifyPostViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(blogpost).State = EntityState.Modified;
+                Post blogpost = _context.BlogPosts.Single(x => x.Id == viewModel.Id);
+                blogpost.DateLastModified = DateTime.Now;
+                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model. This would avoid
+                // the over-posting problem below where someone could post Id=3 and change the post's ID
+                UpdateModel<Post>(blogpost);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(blogpost);
+            return View(viewModel);
         }
 
         //
@@ -87,8 +97,8 @@ namespace JakAttack.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
-            return View(blogpost);
+            Post blogpost = _context.BlogPosts.Single(x => x.Id == id);
+            return View(Mapper.Map<DisplayPostViewModel>(blogpost));
         }
 
         //
@@ -97,7 +107,7 @@ namespace JakAttack.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogPost blogpost = _context.BlogPosts.Single(x => x.BlogPostId == id);
+            Post blogpost = _context.BlogPosts.Single(x => x.Id == id);
             _context.BlogPosts.Remove(blogpost);
             _context.SaveChanges();
             return RedirectToAction("Index");
