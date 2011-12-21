@@ -239,6 +239,9 @@
     <Content Include="Views\BlogPosts\_Article.cshtml" />
     <Content Include="Views\BlogPosts\_Form.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jakattack_logo.pdn" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
