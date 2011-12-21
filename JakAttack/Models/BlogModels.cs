@@ -13,6 +13,8 @@ namespace JakAttack.Models.Blog
 
         public string Title { get; set; }
 
+        // This field contains Textile-formatted content. Eventually, this should be allowed to contain HTML as well, but there are
+        // sanitization issues that I don't want to deal with yet.
         public string Content { get; set; }
 
         public DateTime DatePosted { get; set; }

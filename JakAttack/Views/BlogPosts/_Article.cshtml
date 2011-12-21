@@ -13,6 +13,6 @@
         <div class="author">By: @Model.AuthorFullName</div>
     </header>
     <div class="post">
-        @Model.Content
+        @JakAttack.ViewModels.Helpers.TextileToHtml(Model.Content)
     </div>
 </article>

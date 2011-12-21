@@ -50,9 +50,10 @@ namespace JakAttack.Controllers
             if (ModelState.IsValid)
             {
                 Post post = new Post();
-                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model. This would avoid
-                // the over-posting problem below where someone could post Id=3 and specify the post's ID
-                UpdateModel(post);
+                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model.
+                // Automapper doesn't support unflattening yet.
+                post.Content = viewModel.Content;
+                post.Title = viewModel.Title;
                 post.DatePosted = DateTime.Now.ToUniversalTime();
                 post.Author = _context.Users.Single(u => u.ClaimedId == User.Identity.Name);
 
@@ -81,11 +82,12 @@ namespace JakAttack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Post blogpost = _context.BlogPosts.Single(x => x.Id == viewModel.Id);
-                blogpost.DateLastModified = DateTime.Now;
-                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model. This would avoid
-                // the over-posting problem below where someone could post Id=3 and change the post's ID
-                UpdateModel<Post>(blogpost);
+                Post post = _context.BlogPosts.Single(x => x.Id == viewModel.Id);
+                post.DateLastModified = DateTime.Now;
+                // It would be better to use ValueInjector or something to get the viewModel fields into the actual database model. 
+                // Automapper doesn't support unflattening yet.
+                post.Content = viewModel.Content;
+                post.Title = viewModel.Title;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
